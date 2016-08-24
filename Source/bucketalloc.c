@@ -40,7 +40,12 @@ typedef struct Bucket Bucket;
 
 struct Bucket
 {
-	Bucket *next;
+	// alignment hack needed because we changed TESSreal to double
+	union
+	{
+		Bucket *next;
+		double padding;
+	};
 };
 
 struct BucketAlloc
